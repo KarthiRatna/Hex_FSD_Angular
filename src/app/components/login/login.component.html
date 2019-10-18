@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-md-6 col-lg-6 mx-auto">
+        <h2>Login</h2>
+        <form [formGroup]="loginform" (submit)="login()">
+
+            <div class="form-group">
+                <label for="username">User Name</label>
+                <input type="text" name="username" formControlName="username" class="form-control">
+                <div *ngIf="Username.invalid && Username.touched" class="text-danger">
+                    <div *ngIf="Username.errors && Username.errors.required">Username is required</div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" formControlName="password" class="form-control">
+                <div *ngIf="Password.invalid && Password.touched" class="text-danger">
+                    <div *ngIf="Password.errors && Password.errors.required">Password is required</div>
+                    <div *ngIf="Password.errors && Password.errors.minlength">Minmum Length is 8</div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="loginform.invalid">Login</button>
+        </form>
+    </div>
+</div>

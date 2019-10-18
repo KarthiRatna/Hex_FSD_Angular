@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-md-6 col-lg-6 mx-auto">
+        <h2>Add Product</h2>
+        <form #form="ngForm" (submit)="saveTheValuesOfForm(form)">
+            <div class="alert alert-danger" *ngIf="!formStatus.valid && formStatus.submitted">
+                        Failed to add new product
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" class="form-control" [(ngModel)]="product.name" #Fname="ngModel" required/>
+                <div  *ngIf="Fname.invalid && Fname.touched">
+                    <div class="text-danger" *ngIf="Fname.errors && Fname.errors.required">Name cannot be empty</div>
+                </div>
+            </div>
+            <div class="form-group">
+                    <label for="brand">Brand</label>
+                    <input type="text" name="brand" class="form-control"  [(ngModel)]="product.brand" #brand="ngModel" required/>
+                <div *ngIf="brand.invalid && brand.touched">
+                        <div *ngIf="brand.invalid && brand.touched">
+                    <div class="text-danger" *ngIf="brand.errors && brand.errors.required">brand cannot be empty</div>
+                </div>
+            </div>
+            </div>
+            <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" name="price" class="form-control"  [(ngModel)]="product.price" min="1" #price="ngModel"  required/>
+                    <div  *ngIf="price.invalid && price.touched">
+                        <div class="text-danger" *ngIf="price.errors && price.errors.required">price cannot be empty</div>
+                </div>
+            </div>
+            <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="range" name="quantity" class="form-control"  [(ngModel)]="product.quantity" #quantity="ngModel" min="1" max="10000" required/>
+                    <div  *ngIf="quantity.invalid && quantity.touched">
+                            <div class="text-danger" *ngIf="quantity.errors && quantity.errors.required">quantity cannot be empty</div>
+                    </div>
+            </div>
+            <div class="form-group">
+                    <label for="manufacturingdate">Manufacturing Date</label>
+                    <input type="date" name="manufacturingdate" class="form-control"  [(ngModel)]="product.manufacturingDate" #manufacturingdate="ngModel" required/>
+                    <div  *ngIf="manufacturingdate.invalid && manufacturingdate.touched">
+                            <div class="text-danger" *ngIf="manufacturingdate.errors && manufacturingdate.errors.required"> manufacturing date cannot be empty</div>
+                        </div>
+            </div>
+            <div class="form-group">
+                    <label for="reorderlevel">Reorder Level</label>
+                    <input type="range" name="reorderlevel" class="form-control"  [(ngModel)]="product.reorderLevel" #reorderLevel="ngModel" min="1" max="100" required/>
+                    <div  *ngIf="reorderLevel.invalid && reorderLevel.touched">
+                            <div class="text-danger" *ngIf="reorderLevel.errors && reorderLevel.errors.required">reorderlevel cannot be empty</div>
+                        </div>
+            </div>
+            <div class="form-group">
+                    <label for="taxrate">Tax Rate</label>
+                    <input type="number" name="taxrate" class="form-control"  [(ngModel)]="product.taxRate" #taxrate="ngModel" min="1" max="100" required/>
+                    <div  *ngIf="taxrate.invalid && taxrate.touched">
+                            <div class="text-danger" *ngIf="taxrate.errors && taxrate.errors.required">taxrate cannot be empty</div>
+                        </div>
+            </div>
+            <div class="form-group">
+                    <label for="imageUrl">Image Url/ Name</label>
+                    <input type="text" name="imageUrl" class="form-control"   [(ngModel)]="product.imageUrl" #imageUrl="ngModel" required/>
+                    <div  *ngIf="imageUrl.invalid && imageUrl.touched">
+                            <div class="text-danger" *ngIf="imageUrl.errors && imageUrl.errors.required">image Url cannot be empty</div>
+                        </div>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select name="category" [(ngModel)]="product.categoryId" #category="ngModel" class="form-control">
+                    <option [ngValue]="undefined" disabled>--Select--</option>
+                    <option *ngFor="let cat of categories|async" [ngValue]="cat.id">{{cat.name}}</option>
+                </select>
+                <div *ngIf="category.invalid && category.touched">
+                    <div *ngIf="category.errors && category.errors.required" class="text-danger">Category cannot be empty</div>
+                </div>
+            </div>
+            <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Add Product</button>
+        </form>
+    </div>
+</div>
